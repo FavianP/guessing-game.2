@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "viewpoint" content = "width=device-width, initial-scale=1.0">
+<title>Title of the document</title>
+<style> @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Varela+Round&display=swap"); 
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: red;
+}
+main {
+  width: 80%;
+  /*   background-color: beige; */
+  margin: auto;
+  /*   height: 100vh; */
+}
+h1 {
+  background-color: orange;
+  border-radius: 1rem;
+  font-family: "Varela Round", sans-serif;
+  font-size: 5vw;
+}
+input.letter-input {
+  text-align: center;
+  font-size: 2rem;
+  width: calc(80% / 5);
+  height: 60%;
+  box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 50%);
+  background-color: lightyellow;
+  margin: 1rem 1%;
+}
+table {
+  margin: auto;
+  width: 60%;
+}
+tr {
+  vertical-align: top;
+}
+th,
+td {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px dashed black;
+  background-color: beige;
+}
+</style>
+
+</head>
+
+<body>
+    <main>
+        <h1>GUESS THE PASSWORD!</h1>
+        <form id="password-form">
+          <!--     <input class="letter-input" type="text" maxLength="1">
+          <input class="letter-input" type="text" maxLength="1">
+          <input class="letter-input" type="text" maxLength="1">
+          <input class="letter-input" type="text" maxLength="1">
+          <input class="letter-input" type="text" maxLength="1"> -->
+      
+        </form>
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Wrong Letter</th>
+              <th>Wrong Letter</th>
+              <th>Wrong Letter</th>
+              <th>Wrong Letter</th>
+              <th>Wrong Letter</th>
+            </tr>
+            <thead>
+            <tbody>
+              <tr>
+                <td id=td0>X:<br><br></td>
+                <td id=td1>X:<br><br></td>
+                <td id=td2>X:</td>
+                <td id=td3>X:</td>
+                <td id=td4>X:</td>
+              </tr>
+            </tbody>
+      
+        </table>
+        <img src="" alt="Computer man" style="width:48px;height:48px;">
+      </main>  
+
+      <script> // cache the password form
+        const passwordForm = document.getElementById("password-form");
+        
+        // initialize the game variables
+        let phrase = "guess";
+        
+        let index = 0;
+        
+        for (let char of phrase) {
+          // console.log("hello");
+          const letterInput = document.createElement("input");
+          letterInput.type = "text";
+          letterInput.maxLength = "1";
+          letterInput.classList.add("letter-input");
+          letterInput.id = index.toString();
+          index++;
+          passwordForm.appendChild(letterInput);
+        }
+        
+        passwordForm.addEventListener("change", function (event) {
+          console.log(event.target.value);
+          const thisInput = event.target;
+          const guess = thisInput.value;
+          console.log(guess);
+          console.log(thisInput.id);
+        
+          if (guess === phrase[thisInput.id]) {
+            console.log("You guessed correct");
+            thisInput.disbled = true;
+            thisInput.placeholder = guess;
+          } else {
+            // add id's to the table data
+            console.log("incorrect guess");
+            document.getElementById(`td${thisInput.id}`).innerHTML += "<br>" + guess;
+            thisInput.value = "";
+          }
+        }); 
+        </script>
+
+</body>
+
+</html>
